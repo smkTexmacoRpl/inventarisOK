@@ -13,14 +13,14 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif\
+                    @endif
 
                     <div class="mb-3">
                         <form action="{{ route('jenis_barang.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
-                            <label for="jenis" class="form-label">Jenis Barang</label>
-                            <input type="text" name="jenis" class="form-control" placeholder="masukan jenis barang"
+                            <label for="jenis" class="form-label">Kategori</label>
+                            <input type="text" name="jenis" class="form-control" placeholder="masukan kategori barang"
                                 required>
                     </div>
                     <div class="mb-3">

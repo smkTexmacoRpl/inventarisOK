@@ -1,4 +1,7 @@
 @extends('layouts.apps')
+@section('title')
+    {{ 'edit barang' }}
+@endsection
 @section('content')
     <div class="col-10 offset-md-1">
         <div class="card">
@@ -72,6 +75,22 @@
                                     @endforelse
                                 </select>
                             </div>
+
+                            <label for="supplier" class="col-sm-2 col-form-label">Supplier </label>
+                            <div class="col-sm-10 mb-2">
+                                <select name="supplier" id="supplier" class="form-control">
+                                    <option value="">--pilih lokasi--</option>
+                                    @forelse ($supplier as $s)
+                                        <option value="{{ $s->id }}"
+                                            {{ $barang->supplier_id == $s->id ? 'selected' : '' }}>{{ $s->nama_supplier }}
+                                        </option>
+                                    @empty
+                                        {{ '_empty' }}
+                                    @endforelse
+                                </select>
+                            </div>
+
+
                             <label for="gambar" class="col-sm-2 col-form-label">Gambar </label>
                             <div class="col-sm-10 mb-2">
                                 <input type="file" name="gambar" id="gambar" class="form-control">

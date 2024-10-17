@@ -23,10 +23,10 @@
                                     @endforelse
                                 </select>
                             </div>
-                            <label for="jenis" class="col-sm-4 col-form-label">Jenis_baranq</label>
+                            <label for="jenis" class="col-sm-4 col-form-label">Kategori_barang</label>
                             <div class="col">
                                 <select name="jenis" id="jenis" class="form-control mb-2">
-                                    <option value="">--pilih jenis barang--</option>
+                                    <option value="">--pilih kategori barang--</option>
                                     @forelse ($jenis as $j)
                                         <option value="{{ $j->id }}">{{ $j->jenis_barang }}</option>
                                     @empty
@@ -48,6 +48,17 @@
                             <label for="harga" class="col-sm-2 col-form-label">Harga </label>
                             <div class="col-sm-10 mb-2">
                                 <input type="number" name="harga" id="harga" class="form-control">
+                            </div>
+                            <label for="supplier" class="col-sm-2 col-form-label">Supplier </label>
+                            <div class="col-sm-10 mb-2">
+                                <select name="supplier" id="supplier" class="form-control">
+                                    <option value="">--pilih Supplier--</option>
+                                    @forelse ($supplier as $s)
+                                        <option value="{{ $s->id }}">{{ $s->nama_supplier }}</option>
+                                    @empty
+                                        {{ '_empty' }}
+                                    @endforelse
+                                </select>
                             </div>
                             <label for="lokasi" class="col-sm-2 col-form-label">Lokasi </label>
                             <div class="col-sm-10 mb-2">

@@ -15,7 +15,7 @@
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ URL('/jenis_barang') }}">
-                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">Type Barang</span>
+                    <i class="align-middle" data-feather="book"></i> <span class="align-middle">kategri Barang</span>
                 </a>
             </li>
             <li class="sidebar-item">
@@ -33,8 +33,6 @@
                     <i class="align-middle" data-feather="database"></i> <span class="align-middle">Barang</span>
                 </a>
             </li>
-
-
 
             <li class="sidebar-header">
                 <i class="align-middle" data-feather="settings"></i>
@@ -75,6 +73,6 @@
                     <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
                 </a>
             </li>
-
-
+        </ul>
+    </div>
 </nav>

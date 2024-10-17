@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\JenisBarang;
 use App\Models\Lokasi;
+use App\Models\Supplier;
 use App\Models\Merk;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -33,8 +34,9 @@ class BarangController extends Controller
       $merk = Merk::all();
       $jenis = JenisBarang::all();
       $lokasi = Lokasi::all();
+      $supplier = Supplier::all();  // ambil semua data supplier
       
-      return view('barang.input', \compact('merk','jenis','lokasi'));
+      return view('barang.input', \compact('merk','jenis','lokasi','supplier'));
     }
 
     /**
@@ -71,6 +73,7 @@ class BarangController extends Controller
                     'merk_id' => $request->merk,
                     'jenis_id' => $request->jenis,
                     'lokasi_id' => $request->lokasi,
+                    'supplier_id'=>$request->supplier,
                     'jumlah_barang' => $request->jumlah,
                     'harga' => $request->harga,
                     'gambar_barang'=>$imageName,
@@ -83,6 +86,7 @@ class BarangController extends Controller
                     'merk_id' => $request->merk,
                     'jenis_id' => $request->jenis,
                     'lokasi_id' => $request->lokasi,
+                    'supplier_id'=>$request->supplier,
                     'jumlah_barang' => $request->jumlah,
                     'harga' => $request->harga,
                     'keterangan'=>$request->keterangan,
@@ -106,12 +110,13 @@ class BarangController extends Controller
      */
     public function edit(string $id)
     {
-        $barang = Barang::with(['merk','jenis','lokasi'])->where('id',$id)->first();
+        $barang = Barang::with(['merk','jenis','lokasi','supplier'])->where('id',$id)->first();
         $merk = Merk::all();
         $jenis = JenisBarang::all();
         $lokasi = Lokasi::all();
+        $supplier = Supplier::all();
         
-        return view('barang.edit', \compact('barang','merk','jenis','lokasi'));
+        return view('barang.edit', \compact('barang','merk','jenis','lokasi','supplier'));
     }
 
     /**
@@ -132,9 +137,9 @@ class BarangController extends Controller
         ]);
 
         $barang = Barang::find($id);
-        if($barang->gambar_barang){
-
-          if($request->hasFile('gambar')){
+        
+        if($request->hasFile('gambar')){
+            if($barang->gambar_barang){
             $gambar_path = \public_path('barang/'.$barang->gambar_barang);
             $gambar_path1 = \public_path('barang/thumbnails/'.$barang->gambar_barang);
 
@@ -152,7 +157,7 @@ class BarangController extends Controller
             $thumbImage->resize(150, 150);
             $thumbImage->save(public_path('barang/thumbnails/'.$imageName));
             $barang->gambar_barang = $imageName;
-            
+        }
           
         
         $barang->update([
@@ -161,12 +166,13 @@ class BarangController extends Controller
           'merk_id' => $request->merk,
           'jenis_id' => $request->jenis,
           'lokasi_id' => $request->lokasi,
+          'supplier_id' => $request->supplier,
           'jumlah_barang' => $request->jumlah,
           'harga' => $request->harga,
         'keterangan'=>$request->keterangan,
       ]);   
     
-  }
+  
       return \redirect()->route('barangs.index')->with('success','edited ! ');
 
   }
